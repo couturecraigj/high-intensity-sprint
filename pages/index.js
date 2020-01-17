@@ -145,8 +145,8 @@ const HomePage = () => {
     if (state === "activateOnMove") {
       setWatchId(
         navigator.geolocation.watchPosition(position => {
-          if (position.coords.speed) {
-            setSpeed(position.coords.speed);
+          if (Math.floor(position.coords.speed * 2.237)) {
+            setSpeed((position.coords.speed * 2.237).toFixed(2));
             start(position.coords);
           }
         })
