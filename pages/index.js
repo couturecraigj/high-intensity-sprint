@@ -114,6 +114,7 @@ const useTimer = () => {
 };
 
 const HomePage = () => {
+  const [speed, setSpeed] = useState();
   const [lengthOfSprint, setLengthOfSprint] = useInput(v => +v);
   const [lengthOfBreak, setLengthOfBreak] = useInput(v => +v);
   const [state, setState] = useState("stop");
@@ -145,6 +146,7 @@ const HomePage = () => {
       setWatchId(
         navigator.geolocation.watchPosition(position => {
           if (position.coords.speed) {
+            setSpeed(position.coords.speed);
             start(position.coords);
           }
         })
@@ -154,6 +156,7 @@ const HomePage = () => {
   return (
     <div>
       <div>{timePassed ? timePassed.toFixed(2) : ""}</div>
+      {speed && <div>{speed}</div>}
       {!!distance && <div>{`Traveled: ${distance}KM`}</div>}
       <div>
         <label>
